@@ -32,6 +32,11 @@ public interface TickEvent {
 		public byte getNote() {
 			return this.note;
 		}
+		
+		@Override
+		public String toString() {
+			return "ON_"+note;
+		}
 
 		@Override
 		public void addMidiEvent(Track track, int tick) throws InvalidMidiDataException {
@@ -48,6 +53,11 @@ public interface TickEvent {
 	public class NoteOffEvent implements TickEvent {
 		
 		public NoteOffEvent() {
+		}
+		
+		@Override
+		public String toString() {
+			return "OFF";
 		}
 
 		@Override
@@ -78,6 +88,11 @@ public interface TickEvent {
 	public class HoldEvent implements TickEvent {
 		
 		public HoldEvent() {
+		}
+		
+		@Override
+		public String toString() {
+			return "HOLD";
 		}
 
 		@Override

@@ -1,5 +1,10 @@
 package tests;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiEvent;
 import javax.sound.midi.MidiSystem;
@@ -20,7 +25,7 @@ public class RandomGeneratorTest {
 	private RandomGenerator gen;
 	private Sequencer sequencer;
 	private Track track;
-	Sequence sequence;
+	private Sequence sequence;
 	
 	@Before
 	public void initialize() {
@@ -92,6 +97,22 @@ public class RandomGeneratorTest {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@Test
+	public void testRandomFromPopulation() {
+		List<Measure> population = new ArrayList<>();
+		for (int i=0; i<4; i++) {
+			Measure m = RandomGenerator.getGenerator().randomMeasure(8);
+			m.setFitness(i);
+			population.add(m);
+		}
+		
+		List<Measure> results = gen.randomFromPopulation(population, 0);
+		assertEquals(0, results.size());
+		
+		results = gen.randomFromPopulation(population, 2);
+		assertEquals(2, results.size());
 	}
 
 }

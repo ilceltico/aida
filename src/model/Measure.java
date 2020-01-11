@@ -38,12 +38,26 @@ public class Measure {
 		this.events = new ArrayList<TickEvent>(events);
 	}
 	
+	public int getLength() {
+		return this.events.size();
+	}
 	
 	public void addToTrack(Track track) throws InvalidMidiDataException {
 		for (int i=0; i<events.size(); i++) {
 			events.get(i).addMidiEvent(track, i);
 		}
 		
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		for (TickEvent event : events) {
+			s.append(event.toString());
+			s.append(", ");
+		}
+		s.delete(s.length()-2, s.length());
+		return s.toString();
 	}
 
 }

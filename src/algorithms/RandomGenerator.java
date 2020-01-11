@@ -22,6 +22,14 @@ public class RandomGenerator {
 		return instance;
 	}
 	
+	public int nextInt() {
+		return random.nextInt();
+	}
+	
+	public int nextInt(int bound) {
+		return random.nextInt(bound);
+	}
+	
 	public TickEvent randomEvent() {
 		int rnd = random.nextInt(18);
 		
@@ -44,5 +52,55 @@ public class RandomGenerator {
 		}
 		return new Measure(events);
 	}
+	
+	public List<Measure> randomMeasures(int length, int numMeasures) {
+		List<Measure> result = new ArrayList<>();
+		for (int i=0; i<numMeasures; i++) {
+			result.add(this.randomMeasure(length));
+		}
+		return result;
+	}
+	
+	public List<Measure> randomFromPopulation(List<Measure> population, int num) {
+		if (population == null || population.size() == 0)
+			throw new IllegalArgumentException("Can't use empty populations");
+		if (population.size() <= num)
+			throw new IllegalArgumentException("Can't produce more results than population size");
+		
+		List<Measure> result = new ArrayList<>();
+		
+		for (int i=0; i<num; i++) {
+			int choice = random.nextInt(population.size());
+			
+			if (result.contains(population.get(choice)))
+				continue;
+			
+			result.add(population.get(choice));
+		}
+		
+		return result;
+	}
+	
+//	public List<Measure> randomParentsByFitness(List<Measure> population, int numParents) {
+//		if (population == null || population.size() == 0)
+//			throw new IllegalArgumentException("Can't use empty populations");
+//		if (population.size() <= numParents)
+//			throw new IllegalArgumentException("Can't produce more parents than population size");
+//		
+//		List<Measure> parents = new ArrayList<>();
+//		
+//		int randomMax = population.stream().map(x -> x.getFitness()).reduce(0, Integer::sum);
+//		
+//		for (int i=0; i<numParents; i++) {
+//			int choice = random.nextInt(randomMax);
+//			int populationIndex = 
+//			
+//			if (parents.contains(population.get(choice)))
+//				continue;
+//			
+//		}
+//		
+//		return parents;
+//	}
 
 }

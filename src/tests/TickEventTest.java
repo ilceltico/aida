@@ -19,7 +19,7 @@ public class TickEventTest {
 	
 	private Sequencer sequencer;
 	private Track track;
-	Sequence sequence;
+	private Sequence sequence;
 	
 	@Before
 	public void initialize() {
