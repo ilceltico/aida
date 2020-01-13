@@ -31,14 +31,22 @@ public class RandomGenerator {
 	}
 	
 	public TickEvent randomEvent() {
-		int rnd = random.nextInt(18);
+		int rnd = random.nextInt(10);
 		
 		TickEvent result;
 		
 		switch(rnd) {
 			case 0: result = new NoteOffEvent(); break;
-			case 17: result = new HoldEvent(); break;
-			default: result = new NoteOnEvent(rnd+50); break;
+			case 1: result = new NoteOnEvent(60); break;
+			case 2: result = new NoteOnEvent(62); break;
+			case 3: result = new NoteOnEvent(64); break;
+			case 4: result = new NoteOnEvent(65); break;
+			case 5: result = new NoteOnEvent(67); break;
+			case 6: result = new NoteOnEvent(69); break;
+			case 7: result = new NoteOnEvent(71); break;
+			case 8: result = new NoteOnEvent(72); break;
+			case 9: result = new HoldEvent(); break;
+			default: result = new NoteOnEvent(rnd+59); break;
 		}
 		
 		return result;

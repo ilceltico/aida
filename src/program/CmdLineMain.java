@@ -27,17 +27,20 @@ public class CmdLineMain {
 		
 		
 		// Generate random population
-		List<Measure> population = RandomGenerator.getGenerator().randomMeasures(8, 10);
+		List<Measure> population = RandomGenerator.getGenerator().randomMeasures(8, 8);
 		GeneticAlgorithm alg = new GeneticAlgorithm();
+		int generation = 1;
 		
 		do {
-			System.out.println();
+			System.out.println("\nGeneration " + generation);
 			showPopulation(population);
 			System.out.println("\nChoose the measure to play and set fitness. -1 to play all.\nType 'G' to generate a new epoch, 'E' to exit");
 			String line = in.nextLine();
 			if ("G".equals(line)) {
 				System.out.println("Generating children...");
-				population = alg.produceNewIndividuals(population, 10);
+				population = alg.produceNewIndividuals(population, 6);
+				population.addAll(RandomGenerator.getGenerator().randomMeasures(8, 2));
+				generation++;
 			} else if ("E".equals(line)) {
 				System.out.println("Exiting...");
 				break;

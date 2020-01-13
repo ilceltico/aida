@@ -24,7 +24,7 @@ public class SimpleMutation {
 		List<TickEvent> events = m.getTickEvents();
 		
 		for (int i = 0; i<events.size(); i++) {
-			boolean mutate = RandomGenerator.getGenerator().nextInt((int) Math.round(probability * 1000)) < probability;
+			boolean mutate = RandomGenerator.getGenerator().nextInt(1000) < probability*1000;
 			if (mutate) {
 				TickEvent e = RandomGenerator.getGenerator().randomEvent();
 				events.set(i, e);

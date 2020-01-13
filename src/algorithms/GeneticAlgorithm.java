@@ -23,7 +23,7 @@ public class GeneticAlgorithm {
 			
 			Measure child = SimpleCrossOver.getInstance().apply(parent1, parent2);
 			
-			Measure childMutated = SimpleMutation.getInstance().mutate(child, 0.05);
+			Measure childMutated = SimpleMutation.getInstance().mutate(child, 0.2);
 			
 			result.add(childMutated);
 		}
