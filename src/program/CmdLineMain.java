@@ -1,7 +1,9 @@
 package program;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,14 +26,18 @@ public class CmdLineMain {
 	private static Track track;
 	private static Sequence sequence;
 	
-	private static String baseFolder = java.time.LocalDateTime.now().toString();
+	private static String baseFolder = "results" + File.separatorChar + java.time.LocalDateTime.now().toString();
+	
+	private static int populationSize = 8;
+	private static int measureLength = 16;
+	private static int randomNewIndividuals = 2;
 	
 	public static void main(String args[]) {
 		Scanner in = new Scanner(System.in); 
 		
 		
 		// Generate random population
-		List<Measure> population = RandomGenerator.getGenerator().randomMeasures(8, 8);
+		List<Measure> population = RandomGenerator.getGenerator().randomMeasures(measureLength, populationSize);
 		GeneticAlgorithm alg = new GeneticAlgorithm();
 		int generation = 1;
 		
@@ -50,9 +56,11 @@ public class CmdLineMain {
 			System.out.println("\nChoose the measure to play and set fitness. -1 to play all.\nType 'G' to generate a new epoch, 'E' to exit");
 			String line = in.nextLine();
 			if ("G".equals(line)) {
+				System.out.println("Saving previous generation...");
+				saveGenerationInfo(population, generation);
 				System.out.println("Generating children...");
-				population = alg.produceNewIndividuals(population, 6);
-				population.addAll(RandomGenerator.getGenerator().randomMeasures(8, 2));
+				population = alg.produceNewIndividuals(population, populationSize-randomNewIndividuals);
+				population.addAll(RandomGenerator.getGenerator().randomMeasures(measureLength, randomNewIndividuals));
 				generation++;
 			} else if ("E".equals(line)) {
 				System.out.println("Exiting...");
@@ -101,6 +109,20 @@ public class CmdLineMain {
 		for (int i=0; i<population.size(); i++) {
 			System.out.println("Measure " + i + ": fitness = " + population.get(i).getFitness() + "; notes = " + population.get(i).toString());
 		}
+	}
+	
+	public static void saveGenerationInfo(List<Measure> population, int generation) {
+		String path = baseFolder + File.separatorChar + "gen_" + generation + File.separatorChar + "info.txt";
+		try {
+			PrintWriter writer = new PrintWriter(new File(path));
+			for (int i=0; i<population.size(); i++) {
+				writer.write("Measure " + i + ": fitness = " + population.get(i).getFitness() + "; notes = " + population.get(i).toString() + "\n");
+			}
+			writer.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public static void savePopulation(List<Measure> population, int generation) {
