@@ -32,13 +32,16 @@ public class CmdLineMain {
 	private static int measureLength = 16;
 	private static int randomNewIndividuals = 2;
 	
+	private static double mutationProbability = 0.2;
+	private static int tournamentSize = 4;
+	
 	public static void main(String args[]) {
 		Scanner in = new Scanner(System.in); 
 		
 		
 		// Generate random population
 		List<Measure> population = RandomGenerator.getGenerator().randomMeasures(measureLength, populationSize);
-		GeneticAlgorithm alg = new GeneticAlgorithm();
+		GeneticAlgorithm alg = new GeneticAlgorithm(mutationProbability, tournamentSize);
 		int generation = 1;
 		
 		//Create base folder

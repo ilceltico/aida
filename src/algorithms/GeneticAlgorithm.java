@@ -7,8 +7,13 @@ import model.Measure;
 
 public class GeneticAlgorithm {
 	
-	public GeneticAlgorithm() {
+	private double mutationProbability;
+	private int tournamentSize;
+	
+	public GeneticAlgorithm(double mutationProbability, int tournamentSize) {
 		super();
+		this.mutationProbability = mutationProbability;
+		this.tournamentSize = tournamentSize;
 	}
 	
 	
@@ -16,14 +21,14 @@ public class GeneticAlgorithm {
 		List<Measure> result = new ArrayList<>();
 		
 		for (int i=0; i<num; i++) {
-			List<Measure> candidates = RandomGenerator.getGenerator().randomFromPopulation(population, 4);
+			List<Measure> candidates = RandomGenerator.getGenerator().randomFromPopulation(population, tournamentSize);
 			Measure parent1 = new Tournament(candidates).getWinner();
-			candidates = RandomGenerator.getGenerator().randomFromPopulation(population, 4);
+			candidates = RandomGenerator.getGenerator().randomFromPopulation(population, tournamentSize);
 			Measure parent2 = new Tournament(candidates).getWinner();
 			
 			Measure child = SimpleCrossOver.getInstance().apply(parent1, parent2);
 			
-			Measure childMutated = SimpleMutation.getInstance().mutate(child, 0.2);
+			Measure childMutated = SimpleMutation.getInstance().mutate(child, mutationProbability);
 			
 			result.add(childMutated);
 		}
