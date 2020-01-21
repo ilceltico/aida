@@ -26,8 +26,8 @@ public class CmdLineMain {
 	private static Track track;
 	private static Sequence sequence;
 	
-	private static String baseFolder = "results";
-	private static String thisExecutionFolder = java.time.LocalDateTime.now().toString();
+	private static String baseResultsDirectory = "results";
+	private static String currentExecutionDirectory = java.time.LocalDateTime.now().toString();
 	
 	private static int populationSize = 8;
 	private static int measureLength = 16;
@@ -45,7 +45,7 @@ public class CmdLineMain {
 		GeneticAlgorithm alg = new GeneticAlgorithm(mutationProbability, tournamentSize);
 		int generation = 1;
 		
-		setupFolders();
+		setupDirectories();
 		
 		do {
 			System.out.println("\nGeneration " + generation);
@@ -110,8 +110,8 @@ public class CmdLineMain {
 	}
 	
 	public static void saveGenerationInfo(List<Measure> population, int generation) {
-		String path = baseFolder + File.separatorChar + 
-				thisExecutionFolder + File.separatorChar + "gen_" + 
+		String path = baseResultsDirectory + File.separatorChar + 
+				currentExecutionDirectory + File.separatorChar + "gen_" + 
 				generation + File.separatorChar + "info.txt";
 		try {
 			PrintWriter writer = new PrintWriter(new File(path));
@@ -128,11 +128,11 @@ public class CmdLineMain {
 	public static void savePopulation(List<Measure> population, int generation) {
 		try {
 			
-			String path = baseFolder + File.separatorChar + 
-					thisExecutionFolder + File.separatorChar + "gen_" + generation;
-			File folder = new File(path);
-			if (!folder.mkdir()) {
-				System.out.println("Couldn't create folder for generation " + generation);
+			String path = baseResultsDirectory + File.separatorChar + 
+					currentExecutionDirectory + File.separatorChar + "gen_" + generation;
+			File directory = new File(path);
+			if (!directory.mkdir()) {
+				System.out.println("Couldn't create directory for generation " + generation);
 				return;
 			}
 			
@@ -209,23 +209,23 @@ public class CmdLineMain {
 		} 
 	}
 	
-	public static void setupFolders() {
-		//Create base folder
-		File f = new File(baseFolder);
+	public static void setupDirectories() {
+		//Create base directory
+		File f = new File(baseResultsDirectory);
 		if (f.exists()) {
 			if (!f.isDirectory()) {
-				System.out.println(baseFolder + " already exists and is not a folder");
+				System.out.println(baseResultsDirectory + " already exists and is not a directory");
 				System.exit(1);
 			}
 		} else {
 			if (!f.mkdir()) {
-				System.out.println("Error in " + baseFolder + " folder creation.");
+				System.out.println("Error in " + baseResultsDirectory + " directory creation.");
 				System.exit(1);
 			}
 		}
-		f = new File(baseFolder + File.separatorChar + thisExecutionFolder);
+		f = new File(baseResultsDirectory + File.separatorChar + currentExecutionDirectory);
 		if (!f.mkdir()) {
-			System.out.println("Error in " + thisExecutionFolder + " folder creation.");
+			System.out.println("Error in " + currentExecutionDirectory + " directory creation.");
 			System.exit(1);
 		}
 				
