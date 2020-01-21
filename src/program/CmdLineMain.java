@@ -26,7 +26,8 @@ public class CmdLineMain {
 	private static Track track;
 	private static Sequence sequence;
 	
-	private static String baseFolder = "results" + File.separatorChar + java.time.LocalDateTime.now().toString();
+	private static String baseFolder = "results";
+	private static String thisExecutionFolder = java.time.LocalDateTime.now().toString();
 	
 	private static int populationSize = 8;
 	private static int measureLength = 16;
@@ -44,13 +45,7 @@ public class CmdLineMain {
 		GeneticAlgorithm alg = new GeneticAlgorithm(mutationProbability, tournamentSize);
 		int generation = 1;
 		
-		//Create base folder
-		File f = new File(baseFolder);
-		if (!f.mkdir()) {
-			System.out.println("Error in folder creation.");
-			System.exit(1);
-		}
-		
+		setupFolders();
 		
 		do {
 			System.out.println("\nGeneration " + generation);
@@ -115,7 +110,9 @@ public class CmdLineMain {
 	}
 	
 	public static void saveGenerationInfo(List<Measure> population, int generation) {
-		String path = baseFolder + File.separatorChar + "gen_" + generation + File.separatorChar + "info.txt";
+		String path = baseFolder + File.separatorChar + 
+				thisExecutionFolder + File.separatorChar + "gen_" + 
+				generation + File.separatorChar + "info.txt";
 		try {
 			PrintWriter writer = new PrintWriter(new File(path));
 			for (int i=0; i<population.size(); i++) {
@@ -131,7 +128,8 @@ public class CmdLineMain {
 	public static void savePopulation(List<Measure> population, int generation) {
 		try {
 			
-			String path = baseFolder + File.separatorChar + "gen_" + generation;
+			String path = baseFolder + File.separatorChar + 
+					thisExecutionFolder + File.separatorChar + "gen_" + generation;
 			File folder = new File(path);
 			if (!folder.mkdir()) {
 				System.out.println("Couldn't create folder for generation " + generation);
@@ -209,6 +207,28 @@ public class CmdLineMain {
 		} catch (InvalidMidiDataException | InterruptedException | MidiUnavailableException e) {
 			e.printStackTrace();
 		} 
+	}
+	
+	public static void setupFolders() {
+		//Create base folder
+		File f = new File(baseFolder);
+		if (f.exists()) {
+			if (!f.isDirectory()) {
+				System.out.println(baseFolder + " already exists and is not a folder");
+				System.exit(1);
+			}
+		} else {
+			if (!f.mkdir()) {
+				System.out.println("Error in " + baseFolder + " folder creation.");
+				System.exit(1);
+			}
+		}
+		f = new File(baseFolder + File.separatorChar + thisExecutionFolder);
+		if (!f.mkdir()) {
+			System.out.println("Error in " + thisExecutionFolder + " folder creation.");
+			System.exit(1);
+		}
+				
 	}
 
 }
