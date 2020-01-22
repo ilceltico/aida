@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,7 +29,7 @@ public class CmdLineMain {
 	private static Sequence sequence;
 	
 	private static String baseResultsDirectory = "results";
-	private static String currentExecutionDirectory = java.time.LocalDateTime.now().toString();
+	private static String currentExecutionDirectory;
 	
 	private static int populationSize = 8;
 	private static int measureLength = 16;
@@ -37,6 +39,11 @@ public class CmdLineMain {
 	private static int tournamentSize = 4;
 	
 	public static void main(String args[]) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy_MM_dd-HH_mm_ss");  
+		LocalDateTime now = LocalDateTime.now();  
+		currentExecutionDirectory = dtf.format(now);  
+		
+		
 		Scanner in = new Scanner(System.in); 
 		
 		
