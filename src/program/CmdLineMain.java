@@ -53,10 +53,10 @@ public class CmdLineMain {
 		int generation = 1;
 		
 		setupDirectories();
+		savePopulation(population, generation);
 		
 		do {
 			System.out.println("\nGeneration " + generation);
-			savePopulation(population, generation);
 			showPopulation(population);
 			System.out.println("\nChoose the measure to play and set fitness. -1 to play all.\nType 'G' to generate a new epoch, 'E' to exit");
 			String line = in.nextLine();
@@ -67,6 +67,7 @@ public class CmdLineMain {
 				population = alg.produceNewIndividuals(population, populationSize-randomNewIndividuals);
 				population.addAll(RandomGenerator.getGenerator().randomMeasures(measureLength, randomNewIndividuals));
 				generation++;
+				savePopulation(population, generation);
 			} else if ("E".equals(line)) {
 				System.out.println("Exiting...");
 				break;
