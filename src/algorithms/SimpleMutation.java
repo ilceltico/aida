@@ -15,7 +15,11 @@ public class SimpleMutation {
 		return instance;
 	}
 	
-	public Measure mutate(Measure m, double probability) {
+	private SimpleMutation() {
+		super();
+	}
+	
+	public Measure mutate(Measure m, double probability, int noteRange) {
 		if (m == null || m.getLength() == 0)
 			throw new IllegalArgumentException("Can't mutate empty Measures");
 		if (probability < 0 || probability > 1)
@@ -26,7 +30,7 @@ public class SimpleMutation {
 		for (int i = 0; i<events.size(); i++) {
 			boolean mutate = RandomGenerator.getGenerator().nextInt(1000) < probability*1000;
 			if (mutate) {
-				TickEvent e = RandomGenerator.getGenerator().randomEvent();
+				TickEvent e = RandomGenerator.getGenerator().randomEvent(noteRange);
 				events.set(i, e);
 			}
 		}

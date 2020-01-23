@@ -8,7 +8,7 @@ import javax.sound.midi.Track;
 
 public interface TickEvent {
 
-	public abstract void addMidiEvent(Track track, int tick) throws InvalidMidiDataException;
+	public abstract void addMidiEvent(Track track, int tick, IScale scale) throws InvalidMidiDataException;
 	
 	
 	public class NoteOnEvent extends NoteOffEvent {
@@ -16,16 +16,10 @@ public interface TickEvent {
 		byte note;
 		
 		public NoteOnEvent(byte note) {
-			if (note < 0)
-				throw new IllegalArgumentException("Note can't be negative.");
 			this.note = note;
 		}
 		
 		public NoteOnEvent(int note) {
-			if (note > Byte.MAX_VALUE)
-				throw new IllegalArgumentException("Note can't higher than 127.");
-			if (note < 0)
-				throw new IllegalArgumentException("Note can't be negative.");
 			this.note = (byte) note;
 		}
 		
@@ -39,11 +33,12 @@ public interface TickEvent {
 		}
 
 		@Override
-		public void addMidiEvent(Track track, int tick) throws InvalidMidiDataException {
-			super.addMidiEvent(track, tick);
+		public void addMidiEvent(Track track, int tick, IScale scale) throws InvalidMidiDataException {
+			//First Note off
+			super.addMidiEvent(track, tick, scale);
 			
-			// Note on
-			track.add(new MidiEvent(new ShortMessage(144, 1, this.getNote(), 100), tick));
+			// Then note on
+			track.add(new MidiEvent(new ShortMessage(144, 1, scale.map(this.getNote()), 100), tick));
 			
 				
 		}
@@ -61,7 +56,7 @@ public interface TickEvent {
 		}
 
 		@Override
-		public void addMidiEvent(Track track, int tick) throws InvalidMidiDataException {
+		public void addMidiEvent(Track track, int tick, IScale scale) throws InvalidMidiDataException {
 			if (track == null)
 				throw new IllegalArgumentException("Track can't be null.");
 			if (track.size() != 0) {
@@ -96,7 +91,7 @@ public interface TickEvent {
 		}
 
 		@Override
-		public void addMidiEvent(Track track, int tick) {
+		public void addMidiEvent(Track track, int tick, IScale scale) {
 		}
 		
 	}

@@ -15,6 +15,10 @@ public class SimpleCrossOver {
 		return instance;
 	}
 	
+	private SimpleCrossOver() {
+		super();
+	}
+	
 	public Measure apply(Measure parent1, Measure parent2) {
 		if (parent1 == null || parent2 == null || parent1.getTickEvents().size() == 0 || parent2.getTickEvents().size() == 0)
 			throw new IllegalArgumentException("Parents must contain something");;

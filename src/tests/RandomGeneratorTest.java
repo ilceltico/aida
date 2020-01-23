@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import algorithms.RandomGenerator;
 import model.Measure;
+import model.ScaleFactory;
 
 public class RandomGeneratorTest {
 	private RandomGenerator gen;
@@ -75,9 +76,9 @@ public class RandomGeneratorTest {
 	public void testRandomEvent() {
 		
 		try {
-			gen.randomEvent().addMidiEvent(track, 0);
-			gen.randomEvent().addMidiEvent(track, 2);
-			gen.randomEvent().addMidiEvent(track, 4);
+			gen.randomEvent(10).addMidiEvent(track, 0, ScaleFactory.getInstance().getScale("CMajor"));
+			gen.randomEvent(10).addMidiEvent(track, 2, ScaleFactory.getInstance().getScale("CMajor"));
+			gen.randomEvent(10).addMidiEvent(track, 4, ScaleFactory.getInstance().getScale("CMajor"));
 			track.add(new MidiEvent(new ShortMessage(128,1,50,100), 6));
 		} catch (InvalidMidiDataException e) {
 			e.printStackTrace();
@@ -89,9 +90,9 @@ public class RandomGeneratorTest {
 	@Test
 	public void testRandomMeasure() {
 		
-		Measure m = gen.randomMeasure(50);
+		Measure m = gen.randomMeasure(50, 8);
 		try {
-			m.addToTrack(track);
+			m.addToTrack(track, ScaleFactory.getInstance().getScale("PentatonicCMajor"));
 			track.add(new MidiEvent(new ShortMessage(128,1,50,100), 6));
 		} catch (InvalidMidiDataException e) {
 			e.printStackTrace();
@@ -103,7 +104,7 @@ public class RandomGeneratorTest {
 	public void testRandomFromPopulation() {
 		List<Measure> population = new ArrayList<>();
 		for (int i=0; i<4; i++) {
-			Measure m = RandomGenerator.getGenerator().randomMeasure(8);
+			Measure m = RandomGenerator.getGenerator().randomMeasure(8, 10);
 			m.setFitness(i);
 			population.add(m);
 		}

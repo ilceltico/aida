@@ -9,11 +9,13 @@ public class GeneticAlgorithm {
 	
 	private double mutationProbability;
 	private int tournamentSize;
+	private int noteRange;
 	
-	public GeneticAlgorithm(double mutationProbability, int tournamentSize) {
+	public GeneticAlgorithm(double mutationProbability, int tournamentSize, int noteRange) {
 		super();
 		this.mutationProbability = mutationProbability;
 		this.tournamentSize = tournamentSize;
+		this.noteRange = noteRange;
 	}
 	
 	
@@ -28,7 +30,7 @@ public class GeneticAlgorithm {
 			
 			Measure child = SimpleCrossOver.getInstance().apply(parent1, parent2);
 			
-			Measure childMutated = SimpleMutation.getInstance().mutate(child, mutationProbability);
+			Measure childMutated = SimpleMutation.getInstance().mutate(child, mutationProbability, noteRange);
 			
 			result.add(childMutated);
 		}

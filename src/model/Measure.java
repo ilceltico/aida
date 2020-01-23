@@ -42,9 +42,9 @@ public class Measure {
 		return this.events.size();
 	}
 	
-	public void addToTrack(Track track) throws InvalidMidiDataException {
+	public void addToTrack(Track track, IScale scale) throws InvalidMidiDataException {
 		for (int i=0; i<events.size(); i++) {
-			events.get(i).addMidiEvent(track, i);
+			events.get(i).addMidiEvent(track, i, scale);
 		}
 		
 	}

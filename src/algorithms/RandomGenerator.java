@@ -22,6 +22,10 @@ public class RandomGenerator {
 		return instance;
 	}
 	
+	private RandomGenerator() {
+		super();
+	}
+	
 	public int nextInt() {
 		return random.nextInt();
 	}
@@ -30,41 +34,34 @@ public class RandomGenerator {
 		return random.nextInt(bound);
 	}
 	
-	public TickEvent randomEvent() {
-		int rnd = random.nextInt(10);
+	public TickEvent randomEvent(int noteRange) {
+		int rnd = random.nextInt(noteRange+2);
 		
 		TickEvent result;
 		
-		switch(rnd) {
-			case 0: result = new NoteOffEvent(); break;
-			case 1: result = new NoteOnEvent(60); break;
-			case 2: result = new NoteOnEvent(62); break;
-			case 3: result = new NoteOnEvent(64); break;
-			case 4: result = new NoteOnEvent(65); break;
-			case 5: result = new NoteOnEvent(67); break;
-			case 6: result = new NoteOnEvent(69); break;
-			case 7: result = new NoteOnEvent(71); break;
-			case 8: result = new NoteOnEvent(72); break;
-			case 9: result = new HoldEvent(); break;
-			default: result = new NoteOnEvent(rnd+59); break;
-		}
+		if(rnd == noteRange-2)
+			result = new NoteOffEvent();
+		else if(rnd == noteRange-1)
+			result = new HoldEvent();
+		else
+			result = new NoteOnEvent(rnd);
 		
 		return result;
 		
 	}
 	
-	public Measure randomMeasure(int length) {
+	public Measure randomMeasure(int length, int noteRange) {
 		List<TickEvent> events = new ArrayList<>();
 		for (int i=0; i<length; i++) {
-			events.add(this.randomEvent());
+			events.add(this.randomEvent(noteRange));
 		}
 		return new Measure(events);
 	}
 	
-	public List<Measure> randomMeasures(int length, int numMeasures) {
+	public List<Measure> randomMeasures(int length, int numMeasures, int noteRange) {
 		List<Measure> result = new ArrayList<>();
 		for (int i=0; i<numMeasures; i++) {
-			result.add(this.randomMeasure(length));
+			result.add(this.randomMeasure(length, noteRange));
 		}
 		return result;
 	}

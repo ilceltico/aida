@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.Measure;
+import model.ScaleFactory;
 import model.TickEvent;
 import model.TickEvent.*;
 
@@ -81,7 +82,7 @@ public class MeasureTest {
 		Measure m = new Measure(events);
 		
 		try {
-			m.addToTrack(track);
+			m.addToTrack(track, ScaleFactory.getInstance().getScale("NoScale"));
 		} catch (InvalidMidiDataException e) {
 			e.printStackTrace();
 		}

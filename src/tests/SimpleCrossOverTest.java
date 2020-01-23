@@ -12,13 +12,13 @@ public class SimpleCrossOverTest {
 	
 	@Test
 	public void testApply() {
-		Measure m1 = RandomGenerator.getGenerator().randomMeasure(8);
-		Measure m2 = RandomGenerator.getGenerator().randomMeasure(8);
+		Measure m1 = RandomGenerator.getGenerator().randomMeasure(8, 10);
+		Measure m2 = RandomGenerator.getGenerator().randomMeasure(8, 10);
 		
 		Measure r = SimpleCrossOver.getInstance().apply(m1, m2);
 		assertEquals(8, r.getLength());
 		
-		m1 = RandomGenerator.getGenerator().randomMeasure(10);
+		m1 = RandomGenerator.getGenerator().randomMeasure(10, 10);
 		r = SimpleCrossOver.getInstance().apply(m1, m2);
 		assertEquals(8, r.getLength());
 		
