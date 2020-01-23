@@ -11,6 +11,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.IScale;
+import model.ScaleFactory;
 import model.TickEvent;
 import model.TickEvent.NoteOnEvent;
 import model.TickEvent.NoteOffEvent;
@@ -68,9 +70,9 @@ public class TickEventTest {
 		try {
 			TickEvent tickEvent = new NoteOnEvent((byte) 50);
 			
-			tickEvent.addMidiEvent(track, 4);
-			tickEvent.addMidiEvent(track, 8);
-			tickEvent.addMidiEvent(track, 12);
+			tickEvent.addMidiEvent(track, 4, ScaleFactory.getInstance().getScale("NoScale"));
+			tickEvent.addMidiEvent(track, 8, ScaleFactory.getInstance().getScale("NoScale"));
+			tickEvent.addMidiEvent(track, 12, ScaleFactory.getInstance().getScale("NoScale"));
 			
 			//Only 2 of them play, because the track ends right after the last one.
 			
@@ -85,17 +87,19 @@ public class TickEventTest {
 			TickEvent tickEvent = new NoteOnEvent((byte) 50);
 			TickEvent offEvent = new NoteOffEvent();
 			
-			tickEvent.addMidiEvent(track, 4);
-			tickEvent.addMidiEvent(track, 8);
-			tickEvent.addMidiEvent(track, 12);
-			offEvent.addMidiEvent(track, 16);
+			IScale scale = ScaleFactory.getInstance().getScale("NoScale");
 			
-			tickEvent.addMidiEvent(track, 20);
-			offEvent.addMidiEvent(track, 24);
-			offEvent.addMidiEvent(track, 28);
+			tickEvent.addMidiEvent(track, 4, scale);
+			tickEvent.addMidiEvent(track, 8, scale);
+			tickEvent.addMidiEvent(track, 12, scale);
+			offEvent.addMidiEvent(track, 16, scale);
 			
-			tickEvent.addMidiEvent(track, 32);
-			offEvent.addMidiEvent(track, 36);
+			tickEvent.addMidiEvent(track, 20, scale);
+			offEvent.addMidiEvent(track, 24, scale);
+			offEvent.addMidiEvent(track, 28, scale);
+			
+			tickEvent.addMidiEvent(track, 32, scale);
+			offEvent.addMidiEvent(track, 36, scale);
 			
 		} catch (InvalidMidiDataException e) {
 			e.printStackTrace();

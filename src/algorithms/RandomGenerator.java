@@ -77,8 +77,10 @@ public class RandomGenerator {
 		for (int i=0; i<num; i++) {
 			int choice = random.nextInt(population.size());
 			
-			if (result.contains(population.get(choice)))
+			if (result.contains(population.get(choice))) {
+				i--;
 				continue;
+			}
 			
 			result.add(population.get(choice));
 		}

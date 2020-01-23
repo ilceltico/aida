@@ -17,7 +17,7 @@ public class TournamentTest {
 	public void testWinner() {
 		List<Measure> participants = new ArrayList<>();
 		for (int i=0; i<4; i++) {
-			Measure m = RandomGenerator.getGenerator().randomMeasure(8);
+			Measure m = RandomGenerator.getGenerator().randomMeasure(8, 10);
 			m.setFitness(i);
 			participants.add(m);
 		}
@@ -29,7 +29,7 @@ public class TournamentTest {
 	@Test
 	public void testOne() {
 		List<Measure> participants = new ArrayList<>();
-		Measure m = RandomGenerator.getGenerator().randomMeasure(8);
+		Measure m = RandomGenerator.getGenerator().randomMeasure(8, 10);
 		m.setFitness(1);
 		participants.add(m);
 		Tournament t = new Tournament(participants);
