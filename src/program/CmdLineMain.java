@@ -24,7 +24,6 @@ import algorithms.RandomGenerator;
 import model.Measure;
 import model.ScaleFactory;
 import model.IScale;
-import model.IScale.*;
 
 public class CmdLineMain {
 	
@@ -41,7 +40,7 @@ public class CmdLineMain {
 	private static int randomNewIndividuals = 2;
 	private static int measureLength = 16;
 	private static int noteRange = 8;
-	private static String scaleString = "CMajor";
+	private static String scaleString = "PentatonicCMajor";
 	
 	private static double mutationProbability = 0.2;
 	private static int tournamentSize = 4;
@@ -49,7 +48,7 @@ public class CmdLineMain {
 	public static void main(String args[]) throws ConfigurationException {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy_MM_dd-HH_mm_ss");  
 		LocalDateTime now = LocalDateTime.now();  
-		currentExecutionDirectory = dtf.format(now);  
+		currentExecutionDirectory = dtf.format(now) + "_" + scaleString;  
 
 		scale = ScaleFactory.getInstance().getScale(scaleString);
 		

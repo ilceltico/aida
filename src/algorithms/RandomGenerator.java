@@ -39,9 +39,9 @@ public class RandomGenerator {
 		
 		TickEvent result;
 		
-		if(rnd == noteRange-2)
+		if (rnd == noteRange+2-1)
 			result = new NoteOffEvent();
-		else if(rnd == noteRange-1)
+		else if (rnd == noteRange+2-2)
 			result = new HoldEvent();
 		else
 			result = new NoteOnEvent(rnd);
