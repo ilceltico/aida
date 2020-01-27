@@ -1,0 +1,8 @@
+Measure 0: fitness = 1; notes = HOLD, HOLD, ON_2, ON_2, ON_4, ON_1, ON_0, ON_4, ON_5, ON_0, ON_1, ON_3, ON_4, ON_3, ON_3, ON_5
+Measure 1: fitness = 1; notes = ON_3, ON_4, OFF, ON_1, ON_0, ON_5, ON_3, ON_0, ON_4, ON_3, ON_1, ON_0, OFF, ON_0, ON_1, ON_0
+Measure 2: fitness = 1; notes = ON_0, ON_2, OFF, ON_2, ON_4, ON_1, ON_0, ON_0, ON_5, ON_1, ON_1, ON_1, HOLD, ON_3, ON_3, ON_0
+Measure 3: fitness = 0; notes = ON_3, ON_0, HOLD, OFF, ON_4, ON_4, ON_5, HOLD, ON_3, ON_4, HOLD, ON_2, ON_5, ON_1, OFF, ON_3
+Measure 4: fitness = 0; notes = ON_3, ON_0, HOLD, OFF, ON_4, ON_5, HOLD, HOLD, ON_3, HOLD, HOLD, ON_1, ON_5, ON_1, ON_2, ON_3
+Measure 5: fitness = 1; notes = HOLD, HOLD, ON_2, ON_2, ON_4, ON_1, ON_0, ON_4, ON_4, ON_0, ON_1, ON_1, ON_3, ON_3, ON_3, ON_5
+Measure 6: fitness = 0; notes = ON_3, ON_4, OFF, ON_2, ON_2, OFF, ON_3, ON_2, ON_2, ON_5, HOLD, ON_0, OFF, ON_2, ON_2, HOLD
+Measure 7: fitness = 0; notes = ON_1, HOLD, ON_5, ON_0, ON_1, ON_4, ON_5, ON_1, ON_0, ON_2, ON_3, ON_4, ON_1, OFF, ON_3, HOLD

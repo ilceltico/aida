@@ -27,7 +27,7 @@ public interface IScale {
 				case 3: result = 65; break;
 				case 4: result = 67; break;
 				case 5: result = 69; break;
-				case 6: result = 70; break;
+				case 6: result = 71; break;
 				default: throw new IllegalArgumentException();
 			}
 			result = result + base * 12;

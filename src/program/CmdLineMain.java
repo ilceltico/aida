@@ -39,7 +39,7 @@ public class CmdLineMain {
 	private static int populationSize = 8;
 	private static int randomNewIndividuals = 2;
 	private static int measureLength = 16;
-	private static int noteRange = 8;
+	private static int noteRange = 6;
 	private static String scaleString = "PentatonicCMajor";
 	
 	private static double mutationProbability = 0.2;
@@ -76,8 +76,10 @@ public class CmdLineMain {
 				generation++;
 				savePopulation(population, generation);
 			} else if ("E".equals(line)) {
-				System.out.println("Exiting...");
-				break;
+				saveGenerationInfo(population, generation);
+				in.close();
+				System.out.println("Results saved, program terminated.");
+				System.exit(0);
 			} else {
 				try {
 					int index = Integer.parseInt(line);
@@ -114,8 +116,6 @@ public class CmdLineMain {
 			}
 			
 		} while(true);
-		
-		in.close();
 	}
 	
 	public static void showPopulation(List<Measure> population) {
