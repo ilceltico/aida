@@ -6,7 +6,7 @@ Among other parameters, the user can choose the length of the samples, the mappi
 
 The best results were obtained with a Pentatonic C Major scale, 16 notes per sample, and 6 as the note range.
 
-In [/report](https://github.com/ilceltico/aida/tree/master/report) there is a PowerPoint with audio samples, an explanation of what happens in A.I.DA, the UML diagram and the references.
+In [/report](https://github.com/ilceltico/aida/tree/master/report) there is a PowerPoint with audio samples, an explanation of what happens in A.I.DA, the UML diagram and the references. There is also a PDF version of the presentation.
 
 More results can be found in [/results](https://github.com/ilceltico/aida/tree/master/results).
 
